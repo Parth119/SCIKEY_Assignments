@@ -1,5 +1,3 @@
-package null_safety;
-
 import java.util.*;
 
 class Init1{
