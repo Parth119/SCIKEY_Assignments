@@ -5,52 +5,73 @@ import java.util.Scanner;
 
 @FunctionalInterface
 interface operation {
-    void ActionPerform(String str);
+//    void ActionPerform(Character sym,Integer num1, Integer num2);
+void ActionPerform();
 }
 
 class Arithmetic implements operation{
     Scanner sc = new Scanner(System.in);
-    Integer num1=null;
-    Integer num2=null;
-    Integer ans=null;
+    Integer num1;
+    Integer num2;
+    Integer ans;
+    Character sym;
 
     @Override
-    public void ActionPerform(String str) {
+    public void ActionPerform() {
 
-        System.out.println(str+" Answer is :"+ans);
+        init();
+
+        switch(sym){
+            case '+':
+                doAddition();
+                System.out.println("Additon of two numbers is :"+ans);
+                break;
+            case '-':
+                doSubtraction();
+                System.out.println("Subtraction of two numbers is :"+ans);
+                break;
+            case '*':
+                doMultiplication();
+                System.out.println("Multiplication of two numbers is :"+ans);
+                break;
+            default:
+                System.out.println("Invalid Symbol choice");
+                System.exit(0);
+        }
     }
 
-    void init()
-    {
-        System.out.print("Enter First number :");
-        num1= sc.nextInt();
+    void init(){
+        System.out.print("Enter number 1:");
+        num1 = sc.nextInt();
 
-        System.out.print("Enter Second number :");
+        System.out.print("Enter number 2:");
         num2 = sc.nextInt();
+
+        System.out.print("Enter opration:");
+        sym = sc.next().charAt(0);
     }
+
     void doAddition(){
         ans = num1+num2;
-        ActionPerform("Addition");
     }
 
     void doSubtraction(){
         ans = num1 - num2;
-        ActionPerform("Subtraction");
+
     }
 
     void doMultiplication(){
         ans = num1 * num2;
-        ActionPerform("Division");
     }
 }
 
 public class Que4 {
     public static void main(String[] args) {
         Arithmetic a = new Arithmetic();
-        a.init();
-        System.out.println();
-        a.doAddition();
-        a.doSubtraction();
-        a.doMultiplication();
+
+        a.ActionPerform();
+//        a.ActionPerform('+',6,4);
+//        a.ActionPerform('-',12,6);
+//        a.ActionPerform('*',4,4);
     }
 }
