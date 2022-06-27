@@ -1,77 +1,57 @@
 /*
 * Que 4: create program to perform Addition,Subtration and multiplication using function interface with common function name ActionPerform.
 * */
+
 import java.util.Scanner;
 
 @FunctionalInterface
 interface operation {
-//    void ActionPerform(Character sym,Integer num1, Integer num2);
-void ActionPerform();
+    int ActionPerform(Integer num1, Integer num2);
+
 }
 
-class Arithmetic implements operation{
-    Scanner sc = new Scanner(System.in);
-    Integer num1;
-    Integer num2;
-    Integer ans;
-    Character sym;
+class Que4
+{
+    public static void main(String[] args) {
+        Integer num1;
+        Integer num2;
+        Integer ans;
+        Scanner sc = new Scanner(System.in);
 
-    @Override
-    public void ActionPerform() {
+        System.out.print("Enter First number :");
+        num1= sc.nextInt();
 
-        init();
-
-        switch(sym){
-            case '+':
-                doAddition();
-                System.out.println("Additon of two numbers is :"+ans);
-                break;
-            case '-':
-                doSubtraction();
-                System.out.println("Subtraction of two numbers is :"+ans);
-                break;
-            case '*':
-                doMultiplication();
-                System.out.println("Multiplication of two numbers is :"+ans);
-                break;
-            default:
-                System.out.println("Invalid Symbol choice");
-                System.exit(0);
-        }
-    }
-
-    void init(){
-        System.out.print("Enter number 1:");
-        num1 = sc.nextInt();
-
-        System.out.print("Enter number 2:");
+        System.out.print("Enter Second number :");
         num2 = sc.nextInt();
 
-        System.out.print("Enter opration:");
-        sym = sc.next().charAt(0);
-    }
+        operation add = (Integer n1, Integer n2) -> n1+n2;
+        operation sub = (Integer n1, Integer n2) -> n1-n2;
+        operation mul = (Integer n1, Integer n2) -> n1*n2;
 
-    void doAddition(){
-        ans = num1+num2;
-    }
+        while(true){
+            System.out.println();
+            System.out.print("Enter \n1 for Addition\n2 for Subtraction\n3 for Multiplication\n4 to exit\nYour choice :");
+            Integer choice = sc.nextInt();
 
-    void doSubtraction(){
-        ans = num1 - num2;
-
-    }
-
-    void doMultiplication(){
-        ans = num1 * num2;
-    }
-}
-
-public class Que4 {
-    public static void main(String[] args) {
-        Arithmetic a = new Arithmetic();
-
-        a.ActionPerform();
-//        a.ActionPerform('+',6,4);
-//        a.ActionPerform('-',12,6);
-//        a.ActionPerform('*',4,4);
+            switch (choice)
+            {
+                case 1:
+                    ans = add.ActionPerform(num1,num2);
+                    System.out.println("Addition :"+ans);
+                    break;
+                case 2:
+                    ans = sub.ActionPerform(num1,num2);
+                    System.out.println("Subtraction :"+ans);
+                    break;
+                case 3:
+                    ans = mul.ActionPerform(num1,num2);
+                    System.out.println("Multiplication :"+ans);
+                    break;
+                case 4:
+                    System.exit(1);
+                default:
+                    System.out.println("Invalid choice!");
+            }
+        }
     }
 }
